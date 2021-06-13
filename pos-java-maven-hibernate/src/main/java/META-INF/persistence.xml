@@ -6,6 +6,8 @@
 	<persistence-unit name="pos-java-maven-hibernate">
 	
 	<class>model.UsuarioPessoa</class>
+		<class>model.TelefoneUser</class>
+	
 	<properties>
 	
 	<!-- dados de conexao com o banco -->

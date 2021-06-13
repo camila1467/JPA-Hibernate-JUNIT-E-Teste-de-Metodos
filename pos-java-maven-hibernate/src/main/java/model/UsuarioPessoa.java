@@ -1,11 +1,30 @@
 package model;
 
+import java.util.List;
+
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 
 @Entity
+
+
+@NamedQueries(
+		{
+			@NamedQuery(name="UsuarioPessoa.todos",query="select u from UsuarioPessoa u"),
+			@NamedQuery(name="UsuarioPessoa.buscaPorNome",query="select u from UsuarioPessoa u where u.nome= :nome"),
+
+		}
+		)
+
+
+
 public class UsuarioPessoa {
 @Id
 @GeneratedValue(strategy= GenerationType.AUTO)
@@ -15,6 +34,10 @@ private String sobrenome;
 private String email;
 private String login;
 private String senha;
+private int idade;
+
+@OneToMany(mappedBy = "usuarioPessoa", fetch = FetchType.EAGER)
+private List <TelefoneUser>telefoneUsers;
 public Long getId() {
 	return id;
 }
@@ -50,6 +73,13 @@ public String getSenha() {
 }
 public void setSenha(String senha) {
 	this.senha = senha;
+}
+
+public int getIdade() {
+	return idade;
+}
+public void setIdade(int idade) {
+	this.idade = idade;
 }
 @Override
 public String toString() {
